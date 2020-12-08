@@ -1,25 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Orbiter from './Orbiter'
+import styled from 'styled-components'
+
+	const Sun = styled.div`
+		background: yellow; 
+		width: ${({radius}) => radius*2}px;
+		height: ${({radius}) => radius*2}px;
+		border-radius: 50%;
+
+		position: absolute;
+		top: calc(50% - ${props => props.radius}px);
+		left: calc(50% - ${props => props.radius}px);
+	`
+
+	const orbiterData = [{
+		relativeDistance: 1,
+		relativeRadius: 70,
+		speed: 20,
+		color: "blue",
+		offset: 220,
+	},
+		{
+		relativeDistance: 0.2,
+		relativeRadius: 20,
+		speed: 20,
+		color: "blue",
+		offset: 220,
+		}];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+		<div style={{height: "100vh", width: "100vw", backgroundColor: "rgb(48, 48, 48)"}}>
+			<Sun radius={40}>
+				{orbiterData.map( (orbiter, idx) => {
+					return <Orbiter key={idx} {...orbiter} parentRadius={40}  />
+				})}
+			</Sun>
+		</div>
   );
 }
 
